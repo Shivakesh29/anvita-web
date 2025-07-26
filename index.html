@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ANVITA RF & MICROWAVE SYSTEMS PRIVATE LIMITED</title>
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #e7f0fa 0%, #f7fbff 100%);
+            color: #182a3a;
+            min-height: 100vh;
+            padding-top: 110px;
+        }
+        .top-bar {
+            background: #fff;
+            color: #17345f;
+            padding: 7px 60px;
+            font-size: 1rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 24px;
+            border-bottom: 1.5px solid #dce4ef;
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            z-index: 1099;
+            box-sizing: border-box;
+        }
+        .top-bar span, .top-bar a {
+            margin-right: 12px;
+        }
+        .top-bar a {
+            color: #1866ba;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .top-bar a:hover { color: #17345f; }
+        nav {
+            background: #fff;
+            color: #17345f;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 60px;
+            box-shadow: 0 2px 12px 0 #bed1ef27;
+            position: fixed;
+            top: 38px;
+            width: 100vw;
+            z-index: 1098;
+            box-sizing: border-box;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            margin-left: -16px;
+        }
+        .nav-logo span {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-left: 4px;
+            letter-spacing: .5px;
+            color: #1866ba;
+            text-shadow: none;
+        }
+        .nav-logo img {
+            height: 44px;
+            background: transparent;
+            border-radius: 9px;
+            box-shadow: none;
+            padding: 0;
+        }
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        .nav-links a {
+            color: #17345f;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            font-size: 1.08rem;
+            padding: 30px 0 26px 0;
+            position: relative;
+            transition: color 0.25s;
+        }
+        .nav-links a:hover, .nav-links a:focus { color: #225edb; }
+        .nav-links a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2.5px;
+            background: linear-gradient(90deg,#1866ba 0%,#50befe 100%);
+            transition: width 0.25s;
+            border-radius: 2px;
+            margin-top: 2px;
+        }
+        .nav-links a:hover::after, .nav-links a:focus::after { width: 44%; }
+
+        .hero {
+            background: linear-gradient(100deg, #0c1d36 66%, #2daaff 105%);
+            display: flex;
+            align-items: center;
+            padding: 70px 60px 65px 70px;
+            border-radius: 0 0 22px 22px;
+            min-height: 44vh;
+            box-shadow: 0 8px 44px 0 rgba(31,64,104,.09);
+            margin-top: 110px;
+        }
+        .hero-content {
+            color: #fff;
+            max-width: 54%;
+            margin-left: -20px;
+            animation: fadeInUp 1.3s cubic-bezier(.51,.84,.34,1);
+        }
+        .hero-content h1 {
+            font-size: 1.7rem;
+            margin-bottom: 22px;
+            font-weight: 800;
+            letter-spacing: -.035em;
+            text-shadow: 0 4px 18px #0002;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 34px;
+            line-height: 1.68;
+            color: #c6e4fb;
+        }
+        .hero-content a {
+            background: linear-gradient(90deg, #7ce7ff 0%, #2771e0 90%);
+            color: #04355b;
+            font-weight: 700;
+            border: none;
+            border-radius: 36px;
+            text-decoration: none;
+            font-size: 1.18rem;
+            padding: 13px 36px;
+            box-shadow: 0 8px 28px 0 rgba(13, 55, 100, 0.13);
+        }
+        .hero-content a:hover {
+            background: linear-gradient(90deg, #2daaff 0%, #7ce7ff 100%);
+            color: #051728;
+        }
+
+        /* HERO IMAGE SLIDER */
+        .hero-image.slider {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 270px;
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-end;
+            align-items: end;
+            background: #fff2;
+        }
+        .hero-image .slider-img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity .9s cubic-bezier(.5,.95,.4,1);
+            z-index: 1;
+        }
+        .hero-image .slider-img.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        @media (max-width: 900px) {
+            .hero-image.slider { height: 200px; }
+        }
+        @media (max-width: 600px) {
+            .hero-image.slider { height: 140px; }
+        }
+
+        section {
+            background: rgba(255,255,255,0.83);
+            margin: 28px 40px;
+            border-radius: 15px;
+            box-shadow: 0 6px 34px 0 rgba(45,49,66,0.09);
+            padding: 32px 42px 38px 42px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            scroll-margin-top: 110px;
+        }
+        section:not(:last-child):after {
+            content: '';
+            display: block;
+            height: 1.5px;
+            background: linear-gradient(90deg, #8fd9fe 0%, #2771e0 100%);
+            opacity: 0.10;
+            margin: 32px 0 0 0;
+            border-radius: 2px;
+        }
+        section h2 {
+            color: #15518d;
+            margin-bottom: 24px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -.02em;
+            text-shadow: 0 2px 10px #68bbfe13;
+        }
+        .products-list,
+        .applications-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 38px;
+            margin-top: 21px;
+        }
+        .products-list div, .applications-list div {
+            flex: 1 1 250px;
+            background: rgba(240,251,255,0.9);
+            padding: 21px 13px 18px 18px;
+            margin-bottom: 12px;
+            border-radius: 13px;
+            box-shadow: 0 2.5px 12px 0 rgba(10,24,56,0.07);
+            border: 1.5px solid rgba(62,193,240,0.06);
+            font-weight: 500;
+            color: #193757;
+            transition: transform 0.20s, box-shadow 0.20s, border 0.2s;
+            min-width: 236px;
+        }
+        .products-list div:hover, .applications-list div:hover {
+            background: #e1f5ff;
+            transform: translateY(-7px) scale(1.035);
+            box-shadow: 0 8px 32px 0 rgba(110,230,255,0.22);
+            border: 1.5px solid #68bbfe;
+        }
+        .products-list strong, .applications-list strong {
+            display: block;
+            color: #1971e7;
+            font-size: 1.15rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        .about-contact-row {
+            display: flex;
+            gap: 40px;
+            margin: 28px 40px;
+            flex-wrap: wrap;
+        }
+        .about-contact-row section {
+            flex: 1 1 45%;
+            min-width: 300px;
+            margin: 0;
+            background: rgba(255,255,255,0.83);
+            border-radius: 15px;
+            box-shadow: 0 6px 34px 0 rgba(45,49,66,0.09);
+            padding: 32px 42px 38px 42px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            scroll-margin-top: 110px;
+        }
+        @media (max-width: 900px) {
+            body { padding-top: 125px;}
+            .hero { flex-direction: column; padding: 34px 10px 22px 10px; min-height: unset;}
+            .hero-content, .hero-image { max-width: 100%; padding-left: 0; }
+            nav, .top-bar, section, .about-contact-row { padding-left: 14px; padding-right: 14px; }
+            section, .about-contact-row section { padding: 23px 13px 22px 13px;}
+            .about-contact-row { flex-direction: column; margin: 28px 18px;}
+            .about-contact-row section { flex: 1 1 100%; margin-bottom: 30px;}
+        }
+        @media (max-width: 600px) {
+            .nav-links { gap: 15px; font-size: 1rem;}
+            section, .footer, .about-contact-row { margin-left: 2vw; margin-right: 2vw;}
+        }
+        .footer {
+            background: linear-gradient(90deg, #05253d 43%, #2463ca 100%);
+            color: #fff;
+            text-align: center;
+            padding: 22px 0 14px 0;
+            font-size: 1.07rem;
+            margin-top: 36px;
+            border-radius: 0 0 13px 13px;
+            box-shadow: 0 -4px 12px 0 #1024401c;
+            letter-spacing: 0.01em;
+        }
+        form input, form textarea {
+            padding: 7px;
+            margin-bottom: 16px;
+            border: 1.7px solid #bfe6ff;
+            border-radius: 6px;
+            background-color: #faffff;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.2s;
+        }
+        form input:focus, form textarea:focus {
+            border: 1.7px solid #68bbfe;
+            background: #edfaff;
+        }
+        form button[type=submit] {
+            background: linear-gradient(90deg, #2daaff 40%, #15518d 100%);
+            color: #fff;
+            border: none;
+            border-radius: 23px;
+            padding: 10px 34px;
+            font-size: 1.07rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px 0 rgba(62,193,240,0.16);
+            cursor: pointer;
+        }
+        form button[type=submit]:hover {
+            background: linear-gradient(90deg, #7ce7ff 0%, #15518d 80%);
+            color: #0c1d36;
+        }
+        @keyframes fadeInUp {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <span>English</span>
+        <a href="#">Login / Register</a>
+    </div>
+    <nav>
+        <div class="nav-logo">
+            <img src="logo.jpg" alt="ANVITA Logo">
+            <span>ANVITA RF & MICROWAVE SYSTEMS PRIVATE LIMITED</span>
+        </div>
+        <div class="nav-links">
+            <a href="#products">Products</a>
+            <a href="#applications">Applications</a>
+            <a href="#about">About Us</a>
+            <a href="#careers">Careers</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact Us</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1> ANVITA</h1>
+            <p>
+                Your partner in advanced RF & Microwave systems.<br>
+                From design and manufacturing to delivery: industry-leading filters, amplifiers, oscillators, and custom subsystems up to 18GHz.<br>
+                Tailored for telecommunications, aerospace, defense, and more.
+            </p>
+            <a href="#products">Explore Products</a>
+        </div>
+        <div class="hero-image slider">
+            <!-- Add as many images as you'd like here -->
+            <img src="img1.jpg" alt="Project 1" class="slider-img active">
+            <img src="img2.jpg" alt="Project 2" class="slider-img">
+            <img src="img3.jpg" alt="Project 3" class="slider-img">
+            <!-- etc. -->
+        </div>
+    </div>
+
+    <section id="products">
+        <h2>RF & Microwave Components</h2>
+        <div class="products-list">
+            <div>
+                <strong>Amplifiers</strong><br>
+                Low-noise, Power, and Driver Amplifiers for high signal chain performance.
+            </div>
+            <div>
+                <strong>Attenuators & Switches</strong><br>
+                Precision fixed/variable attenuators, mechanical and solid-state RF switches.
+            </div>
+            <div>
+                <strong>Mixers & Multipliers</strong><br>
+                High-isolation passive/active mixers for up/down conversion and frequency synthesis.
+            </div>
+            <div>
+                <strong>Filters & Diplexers</strong><br>
+                Bandpass, lowpass, notch, and custom filters with sharp roll-off and low insertion loss.
+            </div>
+            <div>
+                <strong>Power Dividers</strong><br>
+                High-performance signal splitting, excellent isolation, port matching.
+            </div>
+            <div>
+                <strong>Oscillators & Synthesizers</strong><br>
+                VCOs, PLLs, and DDS-based synthesizers for stable, agile signal generation.
+            </div>
+        </div>
+    </section>
+    <section id="applications">
+        <h2>Applications</h2>
+        <div class="applications-list">
+            <div>
+                <strong>Phased Array Radar Systems</strong><br>
+                Advanced T/R modules, beamforming, agile signal processing.
+            </div>
+            <div>
+                <strong>Electronic Warfare (EW) & ELINT/COMINT</strong><br>
+                Wideband receiver front-ends, high-dynamic range conversion modules.
+            </div>
+            <div>
+                <strong>Satellite Ground Stations</strong><br>
+                Solutions for Ka-, Ku-, and X-band, up/down converters, LNA modules.
+            </div>
+            <div>
+                <strong>UAV and Aerospace RF Payloads</strong><br>
+                Compact, lightweight, and ruggedized subsystems for airborne platforms.
+            </div>
+        </div>
+    </section>
+
+    <div class="about-contact-row">
+      <section id="about">
+        <h2>About Us</h2>
+        <p>
+            <strong>ANVITA RF & MICROWAVE SYSTEMS PRIVATE LIMITED</strong><br>
+            We are a leading provider in the design, development, and manufacturing of innovative RF and microwave solutions for complex requirements in telecommunications, aerospace, and defense. Our expertise spans across filters, amplifiers, oscillators, frequency synthesizers, solid-state power amplifiers, T/R modules, exciter receivers, and up/down converters operating up to 18GHz.<br><br>
+            We deliver reliable components and custom subsystems, tailoring each solution to our clients’ needs, with a commitment to quality, precision, and next-generation technology. Partner with ANVITA for best-in-class RF and microwave engineering.
+        </p>
+      </section>
+    </div>
+
+    <section id="careers">
+        <h2>Careers</h2>
+        <p>
+            Join our expert team driving advancements in RF and Microwave systems!<br>
+            We offer roles in engineering, R&D, production, and sales. Grow your career while working with cutting-edge technology and world-class professionals.<br>
+            <strong>Benefits:</strong> Competitive compensation, professional growth, and a collaborative work culture.<br>
+            <a href="mailto:careers@anvita-rf.com" style="color:#68bbfe;">Apply now</a>
+        </p>
+    </section>
+    <section id="blog">
+        <h2>Blog</h2>
+        <p>
+            Read our latest articles, technical resources, case studies, and news about RF and microwave innovations.<br>
+            <em>Coming soon!</em>
+        </p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>
+        <strong>Address:</strong> [Update Your Address Here]<br>
+        <strong>Phone:</strong> [Update Your Phone Number Here]<br>
+        <strong>Email:</strong> <a href="mailto:info@anvita-rf.com" style="color:#68bbfe;">info@anvita-rf.com</a>
+      </p>
+      <form style="margin-top:12px;">
+        <input type="text" placeholder="Your Name" required style="padding:7px; width:32%; margin-right:18px;">
+        <input type="email" placeholder="Your Email" required style="padding:7px; width:32%; margin-right:18px;">
+        <input type="text" placeholder="Subject" style="padding:7px; width:32%;">
+        <br><br>
+        <textarea placeholder="Your Message" rows="4" style="padding:7px; width:98%;"></textarea>
+        <br><br>
+        <button type="submit">Send Message</button>
+      </form>
+      <div style="margin-top:16px; color:#17345f;">
+        <strong>For inquiries:</strong> info@anvita-rf.com <br>
+        <strong>Careers:</strong> <a href="mailto:careers@anvita-rf.com" style="color:#68bbfe;">careers@anvita-rf.com</a>
+      </div>
+    </section>
+
+    <div class="footer">
+        &copy; 2025 ANVITA RF & MICROWAVE SYSTEMS PRIVATE LIMITED
+    </div>
+
+    <!-- IMAGE SLIDER JS -->
+    <script>
+    document.addEventListener("DOMContentLoaded",function(){
+      const images = document.querySelectorAll('.hero-image.slider .slider-img');
+      let cur = 0;
+      setInterval(() => {
+        images[cur].classList.remove('active');
+        cur = (cur + 1) % images.length;
+        images[cur].classList.add('active');
+      }, 2800);
+    });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
